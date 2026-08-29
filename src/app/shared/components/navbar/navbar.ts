@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
+import { CartService } from '../../../core/services/cart.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -11,4 +12,5 @@ import { CommonModule } from '@angular/common';
 })
 export class Navbar {
   authService = inject(AuthService);
+  cartService = inject(CartService);
 }

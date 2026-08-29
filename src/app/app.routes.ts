@@ -7,49 +7,49 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./features/products/product-list/product-list.component')
-        .then(m => m.ProductListComponent)
+      import('./features/products/product-list/product-list')
+        .then(m => m.ProductList)
   },
   {
     path: 'products/:id',
     loadComponent: () =>
-      import('./features/products/product-detail/product-detail.component')
-        .then(m => m.ProductDetailComponent)
+      import('./features/products/product-detail/product-detail')
+        .then(m => m.ProductDetail)
   },
   {
     path: 'login',
     canActivate: [guestGuard],
     loadComponent: () =>
-      import('./features/auth/login/login.component')
-        .then(m => m.LoginComponent)
+      import('./features/auth/login/login')
+        .then(m => m.Login)
   },
   {
     path: 'register',
     canActivate: [guestGuard],
     loadComponent: () =>
-      import('./features/auth/register/register.component')
-        .then(m => m.RegisterComponent)
+      import('./features/auth/register/register')
+        .then(m => m.Register)
   },
   {
     path: 'cart',
     canActivate: [authGuard],
     loadComponent: () =>
-      import('./features/cart/cart.component')
-        .then(m => m.CartComponent)
+      import('./features/cart/cart')
+        .then(m => m.Cart)
   },
   {
     path: 'orders',
     canActivate: [authGuard],
     loadComponent: () =>
-      import('./features/orders/orders.component')
-        .then(m => m.OrdersComponent)
+      import('./features/orders/orders')
+        .then(m => m.Orders)
   },
   {
     path: 'admin',
     canActivate: [authGuard, adminGuard],
     loadComponent: () =>
-      import('./features/admin/dashboard/dashboard.component')
-        .then(m => m.DashboardComponent)
+      import('./features/admin/dashboard/dashboard')
+        .then(m => m.Dashboard)
   },
   {
     path: '**',

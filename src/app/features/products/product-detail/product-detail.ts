@@ -2,7 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../../../core/services/product.service';
-import { CartService } from '../../../core/services/cart';
+import { CartService } from '../../../core/services/cart.service';
 import { Product } from '../../../core/models/product.model';
 
 @Component({

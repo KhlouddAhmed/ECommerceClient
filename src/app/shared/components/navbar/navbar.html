@@ -11,7 +11,13 @@
 
     @if (authService.currentUser()) {
       <a routerLink="/orders" class="nav-link">Orders</a>
-      <a routerLink="/cart" class="nav-link">Cart</a>
+
+      <a routerLink="/cart" class="nav-link cart-link">
+        Cart
+        @if (cartService.totalItems() > 0) {
+          <span class="cart-badge">{{ cartService.totalItems() }}</span>
+        }
+      </a>
 
       @if (authService.getRole() === 'Admin') {
         <a routerLink="/admin" class="nav-link">Dashboard</a>

@@ -4,7 +4,7 @@ import { ProductService } from '../../../core/services/product.service';
 import { Product } from '../../../core/models/product.model';
 import { Category } from '../../../core/models/category.model';
 import { ProductCard } from '../../../shared/components/product-card/product-card';
-import { CartService } from '../../../core/services/cart';
+import { CartService } from '../../../core/services/cart.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({
