@@ -1,0 +1,38 @@
+<div class="container detail-page">
+  @if (loading()) {
+    <div class="loading-wrapper">
+      <div class="spinner"></div>
+    </div>
+  }
+
+  @if (!loading() && product()) {
+    <div class="row g-5">
+      <div class="col-md-5">
+        <div class="img-wrapper">🛍️</div>
+      </div>
+
+      <div class="col-md-7">
+        <span class="badge-accent">{{ product()!.categoryName }}</span>
+        <h2 class="product-title mt-2">{{ product()!.name }}</h2>
+        <p class="product-desc">{{ product()!.description }}</p>
+
+        <div class="price-row">
+          <span class="price">EGP {{ product()!.price | number }}</span>
+          <span [class]="product()!.stock > 0 ? 'stock-in' : 'stock-out'">
+            {{ product()!.stock > 0 ? 'In stock: ' + product()!.stock : 'Out of stock' }}
+          </span>
+        </div>
+
+        <button class="btn-add-large"
+                [disabled]="product()!.stock === 0"
+                (click)="addToCart()">
+          Add to cart
+        </button>
+
+        @if (added()) {
+          <span class="added-msg">✓ Added to cart!</span>
+        }
+      </div>
+    </div>
+  }
+</div>

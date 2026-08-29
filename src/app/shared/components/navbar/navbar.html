@@ -1,50 +1,26 @@
-<nav class="navbar navbar-expand-lg" style="background:#1a1f2e">
-  <div class="container">
+<nav class="navbar d-flex align-items-center justify-content-between"
+     style="background:#1a1f2e">
+  <a class="brand" routerLink="/">
+    Shop<span>Hub</span>
+  </a>
 
-    <a class="navbar-brand text-white fw-semibold" routerLink="/">
-      Shop<span style="color:#4f8ef7">Hub</span>
+  <div class="d-flex align-items-center gap-3">
+    <a routerLink="/" routerLinkActive="active" class="nav-link">
+      Products
     </a>
 
-    <div class="d-flex align-items-center gap-3">
+    @if (authService.currentUser()) {
+      <a routerLink="/orders" class="nav-link">Orders</a>
+      <a routerLink="/cart" class="nav-link">Cart</a>
 
-      <a routerLink="/" routerLinkActive="text-white"
-         class="text-white-50 text-decoration-none small">
-        Products
-      </a>
-
-      @if (authService.currentUser()) {
-        <a routerLink="/orders"
-           class="text-white-50 text-decoration-none small">
-          Orders
-        </a>
-        <a routerLink="/cart"
-           class="text-white-50 text-decoration-none small">
-          Cart
-        </a>
-
-        @if (authService.getRole() === 'Admin') {
-          <a routerLink="/admin"
-             class="text-white-50 text-decoration-none small">
-            Dashboard
-          </a>
-        }
-
-        <span class="text-white-50 small">
-          {{ authService.currentUser()?.fullName }}
-        </span>
-
-        <button class="btn btn-sm btn-outline-light"
-                (click)="authService.logout()">
-          Logout
-        </button>
-      } @else {
-        <a routerLink="/login"
-           class="btn btn-sm"
-           style="background:#4f8ef7;color:white">
-          Login
-        </a>
+      @if (authService.getRole() === 'Admin') {
+        <a routerLink="/admin" class="nav-link">Dashboard</a>
       }
 
-    </div>
+      <span class="user-name">{{ authService.currentUser()?.fullName }}</span>
+      <button class="logout-btn" (click)="authService.logout()">Logout</button>
+    } @else {
+      <a routerLink="/login" class="btn-accent">Login</a>
+    }
   </div>
 </nav>

@@ -1,0 +1,45 @@
+<div>
+  <div class="hero">
+    <div class="container">
+      <h1>Find everything you need</h1>
+      <p>Browse our collection of quality products</p>
+      <div class="search-input">
+        <input class="input-dark"
+               placeholder="Search products..."
+               (input)="onSearch($any($event.target).value)">
+      </div>
+    </div>
+  </div>
+
+  <div class="container page">
+    <div class="categories">
+      <button class="cat-btn"
+              [class.active]="selectedCategory() === 'All'"
+              (click)="filterByCategory('All')">All</button>
+
+      @for (cat of categories(); track cat.id) {
+        <button class="cat-btn"
+                [class.active]="selectedCategory() === cat.name"
+                (click)="filterByCategory(cat.name)">
+          {{ cat.name }}
+        </button>
+      }
+    </div>
+
+    @if (loading()) {
+      <div class="loading-wrapper">
+        <div class="spinner"></div>
+      </div>
+    } @else if (filtered().length === 0) {
+      <div class="empty-state">No products found.</div>
+    } @else {
+      <div class="products-grid">
+        @for (product of filtered(); track product.id) {
+          <app-product-card
+            [product]="product"
+            (addToCart)="addToCart($event)" />
+        }
+      </div>
+    }
+  </div>
+</div>
