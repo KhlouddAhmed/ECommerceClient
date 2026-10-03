@@ -1,45 +1,199 @@
-<div>
-  <div class="hero">
-    <div class="container">
-      <h1>Find everything you need</h1>
-      <p>Browse our collection of quality products</p>
-      <div class="search-input">
-        <input class="input-dark"
-               placeholder="Search products..."
-               (input)="onSearch($any($event.target).value)">
+<div class="container-fluid px-4">
+
+  <!-- Hero Banner Carousel -->
+  <div class="banner-wrapper position-relative mt-3">
+
+    <!-- Custom Navigation Arrows -->
+    <button class="custom-arrow prev-arrow" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+      <i class="bi bi-chevron-left"></i>
+    </button>
+    <button class="custom-arrow next-arrow" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+      <i class="bi bi-chevron-right"></i>
+    </button>
+
+    <!-- Bootstrap Carousel -->
+    <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+
+      <!-- Indicators -->
+      <div class="carousel-indicators custom-indicators">
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+      </div>
+
+      <!-- Carousel Content -->
+      <div class="carousel-inner rounded-4 shadow-sm banner-inner">
+
+        <!-- Slide 1 -->
+        <div class="carousel-item active">
+          <div class="row align-items-center h-100 px-5">
+            <div class="col-md-7 text-white banner-text-section ">
+              <h4 class="mb-3 fw-normal text-white">Best Deal Online on smart watches</h4>
+              <h1 class="display-4 fw-bold mb-3 text-white">SMART WEARABLE.</h1>
+              <h3 class="mb-0 fw-medium text-white">UP to 80% OFF</h3>
+            </div>
+            <div class="col-md-5 text-center position-relative h-100">
+              <img src="/assets/imgs/smart-watch.png" class="banner-product-img" alt="Smart Watch">
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
+</div>
 
-  <div class="container page">
-    <div class="categories">
-      <button class="cat-btn"
-              [class.active]="selectedCategory() === 'All'"
-              (click)="filterByCategory('All')">All</button>
+<!-- Main Products Section -->
+<div class="container-fluid px-4 mt-5">
 
-      @for (cat of categories(); track cat.id) {
-        <button class="cat-btn"
-                [class.active]="selectedCategory() === cat.name"
-                (click)="filterByCategory(cat.name)">
-          {{ cat.name }}
-        </button>
-      }
+  <!-- Section Header with Title and View All -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="section-title">
+      Grab the best deal on <span class="text-primary-blue">Smartphones</span>
     </div>
+    <a href="javascript:void(0);" class="view-all-link">
+      View All <i class="bi bi-chevron-right"></i>
+    </a>
+  </div>
 
-    @if (loading()) {
-      <div class="loading-wrapper">
-        <div class="spinner"></div>
+  <!-- Categories Pills -->
+  <div class="categories-pills d-flex gap-3 py-3 overflow-auto">
+    <button class="btn pill-btn" [class.active]="selectedCategory() === 'All'" (click)="filterByCategory('All')">
+      All
+    </button>
+
+    @for (cat of categories(); track cat.id) {
+    <button class="btn pill-btn" [class.active]="selectedCategory() === cat.name" (click)="filterByCategory(cat.name)">
+      {{ cat.name }} <i class="bi bi-chevron-down"></i>
+    </button>
+    }
+  </div>
+
+  <!-- Products Grid & Loading States -->
+<div class="products-grid">
+  @for (product of displayedProducts(); track product.id) {
+  <div class="product-card" [routerLink]="['/products', product.id]">
+
+      <!-- Discount Badge -->
+      <div class="discount-badge">
+        <span>56%</span>
+        <span>OFF</span>
       </div>
-    } @else if (filtered().length === 0) {
-      <div class="empty-state">No products found.</div>
-    } @else {
-      <div class="products-grid">
-        @for (product of filtered(); track product.id) {
-          <app-product-card
-            [product]="product"
-            (addToCart)="addToCart($event)" />
-        }
+
+      <!-- Product Image -->
+      <div class="product-img-container">
+        <img src="/assets/imgs/smart-watch.png" 
+             class="product-img" 
+             alt="{{ product.name }}">
+      </div>
+
+      <!-- Divider -->
+      <div class="card-divider"></div>
+
+      <!-- Product Details -->
+      <div class="product-info">
+        <h3 class="product-name">{{ product.name }}</h3>
+
+        <div class="product-prices">
+          <span class="current-price">EGP {{ product.price | number }}</span>
+        </div>
+
+        <div class="save-text">
+          In Stock: {{ product.stock }}
+        </div>
+      </div>
+
+    </div>
+  }
+</div>
+
+<!-- Top Categories Section -->
+<div class="container-fluid px-4 mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="section-title">
+      Shop From <span class="text-primary-blue">Top Categories</span>
+    </div>
+    <a href="javascript:void(0);" class="view-all-link">
+      View All <i class="bi bi-chevron-right"></i>
+    </a>
+  </div>
+
+  <div class="categories-circles d-flex gap-4 justify-content-between">
+    @for (cat of categories(); track cat.id) {
+      <div class="category-circle-item text-center"
+           (click)="filterByCategory(cat.name)"
+           [class.active]="selectedCategory() === cat.name">
+        <div class="category-circle">
+          <img src="/assets/imgs/categories/{{ cat.name.toLowerCase() }}.png"
+               [alt]="cat.name"
+               onerror="this.src='/assets/imgs/smart-watch.png'">
+        </div>
+        <p class="category-label">{{ cat.name }}</p>
       </div>
     }
   </div>
 </div>
+
+<!-- Top Electronics Brands Section -->
+<div class="container-fluid px-4 mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="section-title">
+      Top <span class="text-primary-blue">Electronics Brands</span>
+    </div>
+    <a href="javascript:void(0);" class="view-all-link">
+      View All <i class="bi bi-chevron-right"></i>
+    </a>
+  </div>
+
+  <div class="brands-grid">
+    <div class="brand-card brand-dark">
+      <div class="brand-tag">IPHONE</div>
+      <div class="brand-logo">
+        <img src="/assets/imgs/brands/apple.png" alt="Apple"
+             onerror="this.src='/assets/imgs/smart-watch.png'">
+      </div>
+      <p class="brand-offer">UP to 80% OFF</p>
+      <div class="brand-product">
+        <img src="/assets/imgs/brands/iphone.png" alt="iPhone"
+             onerror="this.src='/assets/imgs/smart-watch.png'">
+      </div>
+    </div>
+
+    <div class="brand-card brand-yellow">
+      <div class="brand-tag">REALME</div>
+      <div class="brand-logo">
+        <img src="/assets/imgs/brands/realme.png" alt="Realme"
+             onerror="this.src='/assets/imgs/smart-watch.png'">
+      </div>
+      <p class="brand-offer dark">UP to 80% OFF</p>
+      <div class="brand-product">
+        <img src="/assets/imgs/brands/realme-phone.png" alt="Realme Phone"
+             onerror="this.src='/assets/imgs/smart-watch.png'">
+      </div>
+    </div>
+
+    <div class="brand-card brand-orange">
+      <div class="brand-tag">XIAOMI</div>
+      <div class="brand-logo">
+        <img src="/assets/imgs/brands/xiaomi.png" alt="Xiaomi"
+             onerror="this.src='/assets/imgs/smart-watch.png'">
+      </div>
+      <p class="brand-offer dark">UP to 80% OFF</p>
+      <div class="brand-product">
+        <img src="/assets/imgs/brands/xiaomi-phone.png" alt="Xiaomi Phone"
+             onerror="this.src='/assets/imgs/smart-watch.png'">
+      </div>
+    </div>
+  </div>
+
+  <!-- Carousel Indicators -->
+  <div class="brands-indicators d-flex justify-content-center gap-2 mt-3">
+    <div class="brand-dot active"></div>
+    <div class="brand-dot"></div>
+    <div class="brand-dot"></div>
+    <div class="brand-dot"></div>
+    <div class="brand-dot"></div>
+    <div class="brand-dot"></div>
+  </div>
+</div>
+

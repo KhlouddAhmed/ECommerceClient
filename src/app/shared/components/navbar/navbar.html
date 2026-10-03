@@ -1,32 +1,81 @@
-<nav class="navbar d-flex align-items-center justify-content-between"
-     style="background:#1a1f2e">
-  <a class="brand" routerLink="/">
-    Shop<span>Hub</span>
-  </a>
+<!-- Rectangle 1: Top Bar -->
+<div class="top-bar d-none d-md-flex align-items-center">
+  <div class="container-fluid px-4 d-flex justify-content-between align-items-center w-100">
+    <div class="text-muted small">Welcome to worldwide Megamart!</div>
+    <div class="d-flex gap-3 text-muted small align-items-center">
+      <div class="d-flex align-items-center gap-1 action-link">
+        <i class="bi bi-geo-alt text-primary-blue"></i> Deliver to <b class="text-dark">423651</b>
+      </div>
+      <div class="divider"></div>
+      <div class="d-flex align-items-center gap-1 action-link">
+        <i class="bi bi-truck text-primary-blue"></i> Track your order
+      </div>
+      <div class="divider"></div>
+      <div class="d-flex align-items-center gap-1 action-link">
+        <i class="bi bi-patch-check text-primary-blue"></i> All Offers
+      </div>
+    </div>
+  </div>
+</div>
 
-  <div class="d-flex align-items-center gap-3">
-    <a routerLink="/" routerLinkActive="active" class="nav-link">
-      Products
-    </a>
-
-    @if (authService.currentUser()) {
-      <a routerLink="/orders" class="nav-link">Orders</a>
-
-      <a routerLink="/cart" class="nav-link cart-link">
-        Cart
-        @if (cartService.totalItems() > 0) {
-          <span class="cart-badge">{{ cartService.totalItems() }}</span>
-        }
+<!-- Rectangle 2: Main Navbar -->
+<nav class="main-nav d-flex align-items-center shadow-sm">
+  <div class="container-fluid px-4 d-flex align-items-center justify-content-between w-100">
+    
+    <!-- Logo & Menu Area -->
+    <div class="d-flex align-items-center gap-3">
+      <button class="menu-btn d-flex align-items-center justify-content-center border-0 shadow-none">
+        <i class="bi bi-filter-left fs-4 text-primary-blue"></i>
+      </button>
+      <a class="brand d-flex align-items-center text-decoration-none" routerLink="/">
+        <span class="brand-text">MegaMart</span>
       </a>
+    </div>
 
-      @if (authService.getRole() === 'Admin') {
-        <a routerLink="/admin" class="nav-link">Dashboard</a>
+    <!-- Search Bar -->
+    <div class="search-container flex-grow-1 mx-4 d-none d-lg-flex align-items-center position-relative">
+      <i class="bi bi-search search-icon position-absolute text-primary-blue top-50 translate-middle-y"></i>
+      <input type="text" class="form-control search-input shadow-none" placeholder="Search essentials, groceries and more...">
+      <button class="btn list-btn position-absolute top-50 translate-middle-y border-0 shadow-none d-flex align-items-center">
+        <i class="bi bi-list-ul fs-5 text-primary-blue"></i>
+      </button>
+    </div>
+
+    <!-- Actions Area -->
+    <div class="actions-area d-flex align-items-center gap-3">
+      
+      <!-- Auth Section -->
+      @if (authService.currentUser()) {
+        <div class="user-profile d-flex align-items-center gap-2">
+          <div class="icon-circle">
+            <i class="bi bi-person fs-5 text-primary-blue"></i>
+          </div>
+          <div class="d-flex flex-column lh-1">
+            <span class="user-name">{{ authService.currentUser()?.fullName }}</span>
+            <a href="javascript:void(0)" class="logout-link text-muted small mt-1" (click)="authService.logout()">Logout</a>
+          </div>
+        </div>
+      } @else {
+        <a routerLink="/login" class="action-link d-flex align-items-center gap-2 text-decoration-none">
+          <i class="bi bi-person fs-4 text-primary-blue"></i>
+          <span class="fw-medium text-dark">Sign Up/Sign In</span>
+        </a>
       }
 
-      <span class="user-name">{{ authService.currentUser()?.fullName }}</span>
-      <button class="logout-btn" (click)="authService.logout()">Logout</button>
-    } @else {
-      <a routerLink="/login" class="btn-accent">Login</a>
-    }
+      <!-- Vertical Divider -->
+      <div class="divider-vertical h-100 mx-2 d-none d-sm-block"></div>
+
+      <!-- Cart Section -->
+      <a routerLink="/cart" class="action-link cart-link d-flex align-items-center gap-2 text-decoration-none">
+        <div class="position-relative d-flex align-items-center">
+          <i class="bi bi-cart2 fs-4 text-primary-blue"></i>
+          @if (cartService.totalItems() > 0) {
+            <span class="cart-badge">{{ cartService.totalItems() }}</span>
+          }
+        </div>
+        <span class="fw-medium text-dark">Cart</span>
+      </a>
+      
+    </div>
   </div>
 </nav>

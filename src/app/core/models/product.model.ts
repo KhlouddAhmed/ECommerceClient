@@ -7,6 +7,9 @@ export interface Product {
   imageUrl: string;
   categoryName: string;
   categoryId: number;
+  image?: string;
+  oldPrice?: number;
+  saveAmount?: number;
 }
 
 export interface CreateProduct {

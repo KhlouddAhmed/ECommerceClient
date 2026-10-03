@@ -65,7 +65,7 @@
 .submit-btn {
   width: 100%;
   padding: 11px;
-  background: var(--accent);
+  background: var(--primary);
   color: white;
   border: none;
   border-radius: var(--radius-sm);
@@ -76,7 +76,7 @@
 }
 
 .submit-btn:hover {
-  background: var(--accent-hover);
+  background: var(--primary-hover);
 }
 
 .submit-btn:disabled {

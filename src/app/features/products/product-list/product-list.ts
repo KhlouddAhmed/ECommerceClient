@@ -6,10 +6,11 @@ import { Category } from '../../../core/models/category.model';
 import { ProductCard } from '../../../shared/components/product-card/product-card';
 import { CartService } from '../../../core/services/cart.service';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
-  imports: [CommonModule, ProductCard, FormsModule],
+  imports: [CommonModule, ProductCard, FormsModule, RouterLink],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css',
 })
@@ -24,10 +25,13 @@ export class ProductList implements OnInit {
   searchQuery = signal<string>('');
   loading = signal(true);
 
+  displayedProducts = signal<Product[]>([]);
+
   ngOnInit() {
     this.productService.getProducts().subscribe(products => {
       this.products.set(products);
       this.filtered.set(products);
+      this.displayedProducts.set(products.slice(0, 5));
       this.loading.set(false);
     });
 
@@ -48,21 +52,15 @@ export class ProductList implements OnInit {
 
   applyFilters() {
     let result = this.products();
-
     if (this.selectedCategory() !== 'All') {
       result = result.filter(p => p.categoryName === this.selectedCategory());
     }
-
     if (this.searchQuery()) {
       result = result.filter(p =>
         p.name.toLowerCase().includes(this.searchQuery().toLowerCase())
       );
     }
-
     this.filtered.set(result);
-  }
-
-  addToCart(product: Product) {
-    this.cartService.addItem(product);
+    this.displayedProducts.set(result.slice(0, 5));
   }
 }

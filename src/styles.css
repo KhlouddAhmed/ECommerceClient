@@ -1,21 +1,32 @@
+/* ===== Google Fonts ===== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 /* ===== Global Variables ===== */
 :root {
-  --bg-primary: #0f1117;
-  --bg-secondary: #1a1f2e;
-  --bg-card: #1e2130;
-  --bg-card-hover: #252840;
-  --accent: #4f8ef7;
-  --accent-hover: #3a7de8;
-  --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --text-muted: rgba(255, 255, 255, 0.4);
-  --border: rgba(255, 255, 255, 0.08);
-  --success: #2ecc71;
-  --danger: #e74c3c;
+  --primary: #008ECC;
+  --primary-hover: #0079B3;
+  --primary-light: #F3F9FB;
+  
+  --primary-blue: #008ECC;
+  --light-blue-bg: #F3F9FB;
+  --text-main: #333333;
+  --border-light: #EAEAEA;
+
+  --bg-primary: #FFFFFF;
+  --bg-light: #F5F5F5;
+  --bg-input: #F3F9FB;
+  --text-heading: #222222;
+  --text-body: #666666;
+  --text-success: #249B3E;
+  --border: #EDEDED;
+  --border-strong: #D9D9D9;
+  --footer-bg: #008ECC;
+  --footer-dark: #0079B3;
   --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  --radius-md: 16px;
+  --radius-pill: 18px;
+  --shadow-card: 0px 6px 13px rgba(0,0,0,0.05), 0px 24px 24px rgba(0,0,0,0.04);
+  --shadow-hover: 0px 97px 39px rgba(0,0,0,0.01), 0px 54px 33px rgba(0,0,0,0.03), 0px 24px 24px rgba(0,0,0,0.04), 0px 6px 13px rgba(0,0,0,0.05);
 }
 
 /* ===== Reset & Base ===== */
@@ -27,7 +38,7 @@
 
 body {
   background-color: var(--bg-primary);
-  color: var(--text-primary);
+  color: var(--text-heading);
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   min-height: 100vh;
 }
@@ -37,48 +48,49 @@ body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--bg-secondary);
+  background: var(--bg-light);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--accent);
+  background: var(--primary);
   border-radius: 3px;
 }
 
 /* ===== Typography ===== */
 h1, h2, h3, h4, h5, h6 {
-  color: var(--text-primary);
-  font-weight: 600;
+  color: var(--text-heading);
+  font-weight: 700;
 }
 
 p {
-  color: var(--text-secondary);
+  color: var(--text-body);
 }
 
 a {
-  color: var(--accent);
+  color: var(--primary);
   text-decoration: none;
   transition: color 0.2s;
 }
 
 a:hover {
-  color: var(--accent-hover);
+  color: var(--primary-hover);
 }
 
 /* ===== Buttons ===== */
 .btn-accent {
-  background: var(--accent);
+  background: var(--primary);
   color: white;
   border: none;
-  border-radius: var(--radius-sm);
-  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  padding: 9px 20px;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   transition: background 0.2s, transform 0.1s;
+  font-family: inherit;
 }
 
 .btn-accent:hover {
-  background: var(--accent-hover);
+  background: var(--primary-hover);
   transform: translateY(-1px);
 }
 
@@ -89,79 +101,107 @@ a:hover {
 }
 
 .btn-ghost {
-  background: transparent;
-  color: var(--text-secondary);
+  background: var(--bg-input);
+  color: var(--text-body);
   border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  padding: 9px 20px;
   font-size: 14px;
   cursor: pointer;
   transition: all 0.2s;
+  font-family: inherit;
 }
 
 .btn-ghost:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+  border-color: var(--primary);
+  color: var(--primary);
+  background: var(--primary-light);
 }
 
 /* ===== Cards ===== */
-.card-dark {
-  background: var(--bg-card);
+.card-light {
+  background: var(--bg-light);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
 
-.card-dark:hover {
+.card-light:hover {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-hover);
   transform: translateY(-2px);
-  box-shadow: var(--shadow);
 }
 
 /* ===== Form Controls ===== */
-.input-dark {
-  background: var(--bg-secondary);
+.input-light {
+  background: var(--bg-input);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  color: var(--text-primary);
+  color: var(--text-heading);
   padding: 10px 14px;
   font-size: 14px;
   width: 100%;
   transition: border-color 0.2s;
+  font-family: inherit;
 }
 
-.input-dark:focus {
+.input-light:focus {
   outline: none;
-  border-color: var(--accent);
+  border-color: var(--primary);
 }
 
-.input-dark::placeholder {
-  color: var(--text-muted);
+.input-light::placeholder {
+  color: var(--text-body);
 }
 
 /* ===== Badges ===== */
-.badge-accent {
-  background: rgba(79, 142, 247, 0.15);
-  color: var(--accent);
+.badge-primary {
+  background: var(--primary);
+  color: white;
+  border-radius: 0px var(--radius-sm);
+  padding: 3px 8px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge-category {
+  background: var(--bg-input);
+  color: var(--primary);
+  border: 1px solid var(--primary);
   border-radius: 99px;
-  padding: 3px 10px;
+  padding: 3px 12px;
   font-size: 12px;
   font-weight: 500;
 }
 
 .badge-success {
-  background: rgba(46, 204, 113, 0.15);
-  color: var(--success);
-  border-radius: 99px;
-  padding: 3px 10px;
-  font-size: 12px;
+  color: var(--text-success);
+  font-size: 13px;
+  font-weight: 600;
 }
 
-.badge-danger {
-  background: rgba(231, 76, 60, 0.15);
-  color: var(--danger);
-  border-radius: 99px;
-  padding: 3px 10px;
-  font-size: 12px;
+/* ===== Section Titles ===== */
+.section-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-body);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.section-title span {
+  color: var(--primary);
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 3px;
+  background: var(--primary);
+  border-radius: 2px;
 }
 
 /* ===== Loading Spinner ===== */
@@ -169,7 +209,7 @@ a:hover {
   width: 36px;
   height: 36px;
   border: 3px solid var(--border);
-  border-top-color: var(--accent);
+  border-top-color: var(--primary);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -182,30 +222,23 @@ a:hover {
 .page {
   min-height: calc(100vh - 52px);
   padding: 2rem 0;
+  background: var(--bg-primary);
 }
 
-/* ===== Section ===== */
-.section-title {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 1rem;
-}
-
-/* ===== Alert ===== */
+/* ===== Alerts ===== */
 .alert-error {
-  background: rgba(231, 76, 60, 0.1);
-  border: 1px solid rgba(231, 76, 60, 0.3);
-  color: #e74c3c;
+  background: #FFF0F0;
+  border: 1px solid #FFB3B3;
+  color: #CC0000;
   border-radius: var(--radius-sm);
   padding: 10px 14px;
   font-size: 13px;
 }
 
 .alert-success {
-  background: rgba(46, 204, 113, 0.1);
-  border: 1px solid rgba(46, 204, 113, 0.3);
-  color: var(--success);
+  background: #F0FFF4;
+  border: 1px solid #B3FFD1;
+  color: var(--text-success);
   border-radius: var(--radius-sm);
   padding: 10px 14px;
   font-size: 13px;
@@ -216,6 +249,51 @@ a:hover {
   border: none;
   border-top: 1px solid var(--border);
   margin: 1rem 0;
+}
+
+/* ===== Top Bar (زي MegaMart) ===== */
+.top-bar {
+  background: var(--bg-light);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 0;
+  font-size: 13px;
+  color: var(--text-body);
+}
+
+/* ===== Price Styles ===== */
+.price-current {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-heading);
+}
+
+.price-old {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-body);
+  text-decoration: line-through;
+}
+
+.price-save {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-success);
+}
+
+/* ===== View All Link ===== */
+.view-all {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-heading);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.view-all:hover {
+  color: var(--primary);
 }
 
 /* ===== Responsive ===== */
