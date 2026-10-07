@@ -148,7 +148,7 @@
   display: inline-block;
 }
 
-.text-primary-blue::after {
+/* .text-primary-blue::after {
   content: '';
   position: absolute;
   bottom: -6px;
@@ -157,7 +157,7 @@
   height: 3px;
   background-color: var(--primary, #008ECC);
   border-radius: 2px;
-}
+} */
 
 .view-all-link {
   font-size: 14px;

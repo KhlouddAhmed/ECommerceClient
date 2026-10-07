@@ -150,6 +150,54 @@
 .logout-link:hover {
   color: #CC0000 !important;
 }
+/* User Dropdown */
+.user-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 200px;
+  background: #FFFFFF;
+  border: 1px solid #EAEAEA;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+  z-index: 200;
+  overflow: hidden;
+  animation: fadeDown 0.15s ease;
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown-item-custom {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333333;
+  text-decoration: none;
+  transition: background 0.15s;
+  cursor: pointer;
+}
+
+.dropdown-item-custom:hover {
+  background: #F3F9FB;
+  color: #008ECC;
+}
+
+.dropdown-item-custom.text-danger:hover {
+  background: #FFF0F0;
+  color: #CC0000 !important;
+}
+
+.dropdown-divider-custom {
+  height: 1px;
+  background: #EAEAEA;
+  margin: 4px 0;
+}
 
 /* Cart Badge */
 .cart-link {

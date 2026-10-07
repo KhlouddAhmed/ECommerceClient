@@ -13,4 +13,9 @@ import { CommonModule } from '@angular/common';
 export class Navbar {
   authService = inject(AuthService);
   cartService = inject(CartService);
+  showDropdown = false;
+
+  toggleDropdown() {
+    this.showDropdown = !this.showDropdown;
+  }
 }

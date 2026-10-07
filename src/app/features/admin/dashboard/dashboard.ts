@@ -16,6 +16,8 @@ export class Dashboard implements OnInit {
   private productService = inject(ProductService);
   private fb = inject(FormBuilder);
 
+  activeTab = signal<string>('products');
+  
   products = signal<Product[]>([]);
   categories = signal<Category[]>([]);
   loading = signal(true);
